@@ -11,7 +11,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Registrar o arquivo de helpers
+        require_once app_path('Helpers/RoleHelper.php');
+        require_once app_path('Helpers/MoodleRoleManager.php');
     }
 
     /**
