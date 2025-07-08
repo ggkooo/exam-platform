@@ -62,6 +62,20 @@ return [
             ]) : [],
         ],
 
+        'moodle' => [
+            'driver' => 'mysql',
+            'host' => env('MOODLE_DB_HOST', '127.0.0.1'),
+            'port' => env('MOODLE_DB_PORT', '3307'),
+            'database' => env('MOODLE_DB_DATABASE', 'moodle'),
+            'username' => env('MOODLE_DB_USERNAME', 'root'),
+            'password' => env('MOODLE_DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
