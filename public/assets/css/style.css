@@ -1,0 +1,14 @@
+.btn-primary {
+    background-color: #1f4c9b !important;
+    border-color: #1f4c9b !important;
+}
+
+.forgot-password-link {
+    color: #1f4c9b !important;
+    text-decoration: none;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
