@@ -1,52 +1,205 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎓 Exam Platform - Moodle Integration
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> A Laravel-based examination platform with seamless Moodle integration for user authentication and role management.
 
-## About Laravel
+## 🚀 **Features**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### **🔐 Authentication**
+- **Moodle Integration**: Direct authentication against Moodle database
+- **Role-Based Access**: Comprehensive role hierarchy and permissions
+- **Secure Sessions**: Cookie-based session management with 30-day expiration
+- **Auto Role Detection**: Dynamic role fetching and primary role determination
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### **👥 User Management**
+- **Admin Dashboard**: Complete user management interface
+- **Role Assignment**: Assign/remove roles with real-time updates
+- **User Search**: Advanced search with pagination
+- **Role Hierarchy**: admin > manager > editingteacher > teacher > student
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### **🎨 Modern Interface**
+- **Responsive Design**: Bootstrap 5 with mobile-first approach
+- **Modular Architecture**: Reusable partials and components
+- **Professional UI**: Clean, intuitive admin interfaces
+- **Real-time Updates**: AJAX-powered role refresh without logout
 
-## Learning Laravel
+## 📋 **Requirements**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **PHP**: 8.1+
+- **Laravel**: 11.x
+- **Database**: MySQL/PostgreSQL (Moodle integration)
+- **Composer**: Latest version
+- **Node.js**: 16+ (for asset compilation)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ⚡ **Quick Start**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### **1. Clone & Install**
+```bash
+git clone https://github.com/your-username/exam-platform.git
+cd exam-platform
+composer install
+npm install && npm run build
+```
 
-## Laravel Sponsors
+### **2. Environment Setup**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### **3. Database Configuration**
+Configure your `.env` file with Moodle database connection:
 
-### Premium Partners
+```env
+# Default Laravel Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=exam_platform
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# Moodle Database Connection
+MOODLE_DB_CONNECTION=mysql
+MOODLE_DB_HOST=127.0.0.1
+MOODLE_DB_PORT=3306
+MOODLE_DB_DATABASE=moodle
+MOODLE_DB_USERNAME=moodle_user
+MOODLE_DB_PASSWORD=moodle_password
+```
 
-## Contributing
+### **4. Run Migrations**
+```bash
+php artisan migrate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### **5. Start Development Server**
+```bash
+php artisan serve
+```
+
+Visit `http://localhost:8000` and login with your Moodle credentials!
+
+## 🏗️ **Architecture**
+
+### **Backend Structure**
+```
+app/
+├── Http/Controllers/
+│   ├── Auth/LoginController.php       # Moodle authentication
+│   ├── RoleManagementController.php   # Admin role management
+│   └── SessionController.php          # Session & role refresh
+├── Helpers/
+│   ├── RoleHelper.php                 # Role utilities & UI helpers
+│   └── MoodleRoleManager.php          # Database role operations
+└── Providers/AppServiceProvider.php   # Service registration
+```
+
+### **Frontend Structure**
+```
+resources/views/
+├── layouts/app.blade.php              # Base layout template
+├── partials/                          # Reusable components
+├── dashboard.blade.php                # Main dashboard
+├── auth/login.blade.php               # Login interface
+└── admin/                             # Admin interfaces
+    ├── roles.blade.php                # Role management
+    ├── users.blade.php                # User listing
+    └── user-roles.blade.php           # User role editor
+```
+
+## 🎯 **Usage**
+
+### **For Students/Teachers**
+1. Login with Moodle credentials
+2. View dashboard with role information
+3. Access role-appropriate features
+
+### **For Administrators**
+1. Login and access admin panel
+2. Manage users and roles
+3. Assign/remove permissions
+4. Monitor system activity
+
+### **Role Management**
+- **Self Management**: Users can manage their own roles (admin only)
+- **User Management**: Admins can assign roles to other users
+- **Dynamic Updates**: Roles update in real-time without logout
+- **Site Admin**: Special admin role for full system access
+
+## 🔧 **Configuration**
+
+### **Role Hierarchy**
+The system uses Moodle's role hierarchy:
+- `admin/manager`: Full system administration
+- `editingteacher`: Course creation and management
+- `teacher`: Course teaching capabilities
+- `student`: Course participation
+- `guest`: Limited read-only access
+
+### **Security Features**
+- **Permission Checks**: All admin functions require proper authorization
+- **Secure Cookies**: httpOnly cookies with secure transmission
+- **SQL Protection**: Prepared statements prevent injection
+- **Error Logging**: Comprehensive logging for debugging
+
+## 📚 **API Endpoints**
+
+### **Authentication**
+- `POST /login` - Moodle authentication
+- `POST /logout` - Session cleanup
+
+### **Admin Routes** (Requires admin role)
+- `GET /admin/users` - User listing with search
+- `GET /admin/users/{id}/roles` - User role management
+- `POST /admin/users/roles/assign` - Assign role to user
+- `POST /admin/users/roles/remove` - Remove role from user
+
+### **Session Management**
+- `POST /session/refresh-roles` - Refresh current user roles
+
+## 🧪 **Testing**
+
+```bash
+# Run PHP tests
+php artisan test
+
+# Run feature tests
+php artisan test --testsuite=Feature
+
+# Run with coverage
+php artisan test --coverage
+```
+
+## 🤝 **Contributing**
+
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'feat: add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+### **Commit Convention**
+We use semantic commits:
+- `feat:` New features
+- `fix:` Bug fixes
+- `refactor:` Code refactoring
+- `docs:` Documentation updates
+- `test:` Testing improvements
+
+## 📄 **License**
+
+This project is licensed under the [MIT License](LICENSE).
+
+## 🆘 **Support**
+
+For support and questions:
+- 📧 Email: [your-email@domain.com]
+- 🐛 Issues: [GitHub Issues](https://github.com/your-username/exam-platform/issues)
+- 📖 Docs: [Project Wiki](https://github.com/your-username/exam-platform/wiki)
+
+---
+
+**Built with ❤️ using Laravel & Bootstrap**
 
 ## Code of Conduct
 
