@@ -195,13 +195,55 @@
                                 </div>
                             @endif
 
-                            @if(\App\Helpers\RoleHelper::isTeacher())
+                            @if(\App\Helpers\RoleHelper::canCreateExams())
                                 <div class="col-md-4 mb-3">
                                     <div class="card border-primary">
                                         <div class="card-body text-center">
-                                            <i class="bi bi-mortarboard text-primary fs-1"></i>
-                                            <h6 class="mt-2">Ensino</h6>
+                                            <i class="bi bi-file-earmark-text text-primary fs-1"></i>
+                                            <h6 class="mt-2">Gerenciar Provas</h6>
                                             <small class="text-muted">Criar e gerenciar exames</small>
+                                            <div class="mt-2">
+                                                <a href="{{ route('exams.index') }}" class="btn btn-outline-primary btn-sm">
+                                                    <i class="bi bi-list me-1"></i>
+                                                    Minhas Provas
+                                                </a>
+                                                <a href="{{ route('exams.create') }}" class="btn btn-primary btn-sm">
+                                                    <i class="bi bi-plus-circle me-1"></i>
+                                                    Nova Prova
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="card border-success">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-collection text-success fs-1"></i>
+                                            <h6 class="mt-2">Banco de Questões</h6>
+                                            <small class="text-muted">Gerenciar questões por curso/disciplina/módulo</small>
+                                            <div class="mt-2">
+                                                <a href="{{ route('question-bank.index') }}" class="btn btn-outline-success btn-sm">
+                                                    <i class="bi bi-list me-1"></i>
+                                                    Ver Questões
+                                                </a>
+                                                <a href="{{ route('question-bank.create') }}" class="btn btn-success btn-sm">
+                                                    <i class="bi bi-plus-circle me-1"></i>
+                                                    Nova Questão
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if(\App\Helpers\RoleHelper::isTeacher())
+                                <div class="col-md-4 mb-3">
+                                    <div class="card border-success">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-mortarboard text-success fs-1"></i>
+                                            <h6 class="mt-2">Ensino</h6>
+                                            <small class="text-muted">Ferramentas de ensino</small>
                                         </div>
                                     </div>
                                 </div>
@@ -238,6 +280,32 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @if(\App\Helpers\RoleHelper::canCreateExams())
+                                <div class="col-md-4 mb-3">
+                                    <div class="card border-warning">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-diagram-3 text-warning fs-1"></i>
+                                            <h6 class="mt-2">Organizar Conteúdo</h6>
+                                            <small class="text-muted">Gerenciar cursos, disciplinas e módulos</small>
+                                            <div class="mt-2">
+                                                <a href="{{ route('courses.index') }}" class="btn btn-outline-warning btn-sm">
+                                                    <i class="bi bi-mortarboard me-1"></i>
+                                                    Cursos
+                                                </a>
+                                                <a href="{{ route('subjects.index') }}" class="btn btn-outline-warning btn-sm">
+                                                    <i class="bi bi-book me-1"></i>
+                                                    Disciplinas
+                                                </a>
+                                                <a href="{{ route('modules.index') }}" class="btn btn-warning btn-sm">
+                                                    <i class="bi bi-grid-3x3-gap me-1"></i>
+                                                    Módulos
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
