@@ -104,4 +104,23 @@ class RoleHelper
         
         return $classes[$role] ?? 'badge bg-light text-dark';
     }
+    
+    public static function canCreateExams()
+    {
+        return self::isAdmin() || 
+               self::hasRole('coursecreator') || 
+               self::isTeacher() ||
+               self::getPrimaryRole() === 'coordenador';
+    }
+    
+    public static function canManageAllExams()
+    {
+        return self::isAdmin();
+    }
+    
+    public static function isCoordinator()
+    {
+        return self::hasRole('coursecreator') || 
+               self::getPrimaryRole() === 'coordenador';
+    }
 }
